@@ -1,0 +1,19 @@
+T1：俄乌装备损失率"公平比较"——从估计偏误到区间估计
+
+问题描述： 俄乌双方公布战报差异极大。如何客观估计双方真实装备损失率？开源平台 Oryx 和 WarSpotting 提供逐件影像验证的损失记录，但这些记录的"被观测概率"因作战地域和装备类型而异——构成典型的估计偏误问题。核心统计问题：① 如何用点估计和区间估计方法给出准确的装备损失率？② 双方损失率是否存在统计显著差异？
+
+数据描述：
+Oryx (via WarSpotting)：约20,000+条经影像验证的装备损失记录，含类型/日期/坐标
+Kaggle Automated WarSpotting：可直接下载的CSV格式
+Ukraine War Statistics：伤亡时序数据
+
+统计方法链： MLE点估计 → Poisson置信区间（Wald/Score/Exact）→ Block Bootstrap（BCa方法）→ 两独立Poisson条件检验 → 分层估计（按装备类型/时间段）
+
+重要成果：
+可发表论文方向：基于Block Bootstrap的冲突数据偏误校正方法
+估计结果可作为后续时序预测模型(T6)的基础输入
+
+相关链接：
+数据：https://www.kaggle.com/datasets/zsoltlazar/automated-warspotting-equipment-losses
+论文对标：arXiv:2509.07813（Forecasting Russian Equipment Losses）
+Oryx：https://www.oryxspioenkop.com
