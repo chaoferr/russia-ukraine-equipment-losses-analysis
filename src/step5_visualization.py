@@ -24,10 +24,12 @@ def set_paper_style():
     })
 
 def parse_ci(ci_str):
-    """把 CSV 里的字符串 CI '[2.33, 2.88]' 转为 tuple"""
+    """把 CSV 里的字符串 CI 转为 tuple，兼容 np.float64 格式"""
     try:
         if isinstance(ci_str, str):
-            return ast.literal_eval(ci_str)
+            # 去除 numpy 的壳子
+            clean_str = ci_str.replace("np.float64(", "").replace(")", "")
+            return ast.literal_eval(clean_str)
         return ci_str
     except:
         return (0, 0)
@@ -154,6 +156,7 @@ def main():
         plot_mle_comparison(df_res, out_dir)
         plot_stratified_evolution(df_res, out_dir, 'tank')
         plot_stratified_evolution(df_res, out_dir, 'APC')
+        plot_stratified_evolution(df_res, out_dir, 'helicopter')
         print("Bar plots finished.")
         
     if os.path.exists(ts_path):
